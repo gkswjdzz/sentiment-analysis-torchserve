@@ -9,4 +9,4 @@ torchserve --start --ncs --model-store=/home/model-server/model-store --ts-confi
 sleep 10
 ls /home/model-server/model-store > model_list.txt
 cat model_list.txt | xargs -I {} curl -X POST http://localhost:8081/models?url={}
-streamlit run /streamlit/summarize.py --server.enableXsrfProtection=false --server.enableCORS=true
+streamlit run /streamlit/sentiment_analysis.py --server.enableXsrfProtection=false --server.enableCORS=true
