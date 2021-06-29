@@ -23,19 +23,19 @@ FAVICON_URL = "https://ainize.ai/images/github-ainize-box@2x.png"
 
 # Set page title and favicon.
 st.set_page_config(
-    page_title="Summarize!", page_icon=FAVICON_URL,
+    page_title="Sentiment Analysis Text!", page_icon=FAVICON_URL,
 )
 
-st.title("Summarize with teachable NLP!")
+st.title("Sentiment Analysis with teachable NLP!")
 
 st.subheader("Select model and write sentence.")
 
 model = st.selectbox('Select', list(models.keys()))
 model_value = models[model]
-text = st.text_input("Write the sentence you want to summarize!")
+text = st.text_input("Write the sentence you want to analysis!")
 
-if st.button("Summarize!"):
+if st.button("Analysis!"):
     sts = process()
     res = sts.json()
     st.write("")
-    st.write(res[0])
+    st.write(res)
