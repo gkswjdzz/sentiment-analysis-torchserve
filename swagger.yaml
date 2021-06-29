@@ -1,0 +1,139 @@
+openapi: 3.0.1
+
+info:
+  title: Sentiment Analysis with Torchserve
+  description: |
+      Sentiment analysis text with finetuned models.
+  version: "0.1"
+servers:
+  - url: https://main-sentiment-analysis-torchserve-gkswjdzz.endpoint.ainize.ai
+paths:
+  /api/distilbert-base-uncased-finetuned-sst-2-english:
+    post:
+      tags:
+      - English
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/Input'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  text:
+                    type: string
+                example: {
+                  "label":"positive",
+                  "score":0.9998070597648621
+                }
+        '400':
+          description: Bad Request
+        '500':
+          description: Server side error
+  /api/finbert:
+    post:
+      tags:
+      - English
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/Input'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  text:
+                    type: string
+                example: {
+                  "label":"neutral",
+                  "score":0.9192753434181213
+                }
+        '400':
+          description: Bad Request
+        '500':
+          description: Server side error
+  /api/twitter-roberta-base-emotion:
+    post:
+      tags:
+      - English
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/Input'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  text:
+                    type: string
+                example: {
+                  "label":"joy",
+                  "score":0.8922291994094849
+                }
+        '400':
+          description: Bad Request
+        '500':
+          description: Server side error
+  /api/kcelectra-base-nsmc:
+    post:
+      tags:
+      - Korean
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/KoreanInput'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  text:
+                    type: string
+              example: {
+                "label":"positive",
+                "score":0.9996803998947144
+              }
+        '400':
+          description: Bad Request
+        '500':
+          description: Server side error
+Input:
+  type: object
+  properties:
+    text:
+      type: string
+      example: |
+        Data Science is my passion and it is fun
+KoreanInput:
+  type: object
+  properties:
+    text:
+      type: string
+      example: |
+        데이터 과학은 재밌고, 나의 열정 그자체다!
+tags:
+- name: English
+- name: Korean
